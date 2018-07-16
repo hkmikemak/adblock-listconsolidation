@@ -10,7 +10,7 @@ const downloadFile = (url: string): Promise<string> => {
 
 const tryAddDomain = (domain: string, result: any): void => {
   if (!result.hasOwnProperty(domain)) {
-    result[domain] = null;
+    result[domain] = "0.0.0.0";
   }
 };
 
@@ -41,8 +41,9 @@ const processLines = (lines: string, result: any): void => {
     .forEach(i => processLine(i, result));
 };
 
-const generateHosts: () => Promise<string[]> = async () => {
-  let result = {};
+const generateHosts: () => Promise<any[]> = async () => {
+  let result: any = { ...config.hosts };
+
   for (let url of config.blacklists) {
     try {
       console.log(`Download url: ${url}`);
@@ -53,7 +54,7 @@ const generateHosts: () => Promise<string[]> = async () => {
       console.log(`Failed to download or process file: ${url}`, err);
     }
   }
-  return Object.keys(result).sort((a, b) => a.localeCompare(b));
+  return Object.keys(result).sort((a, b) => a.localeCompare(b)).map((i: string) => ({ key: i, value: result[i] }));
 };
 
 export { generateHosts };

@@ -11,6 +11,10 @@
   ],
   "whitelist": [
     "justjared.com",
-    "reddit.com"
-  ]
+    "reddit.com",
+    "thepiratebay.org"
+  ],
+  "hosts": {
+    "hkmikemak.no-ip.org": "192.168.1.1"
+  }
 }
