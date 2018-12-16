@@ -10,15 +10,16 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@types/node": "^10.5.2",
-    "del": "^3.0.0",
-    "gulp": "^4.0.0",
-    "ts-loader": "^4.4.2",
-    "typescript": "^2.9.2",
-    "uglifyjs-webpack-plugin": "^1.2.7",
-    "webpack": "^4.15.1"
+    "@types/node": "^12.7.2",
+    "del": "^5.0.0",
+    "gulp": "^4.0.2",
+    "ts-loader": "^6.0.4",
+    "typescript": "^3.5.3",
+    "uglifyjs-webpack-plugin": "^2.2.0",
+    "webpack": "^4.39.2"
   },
   "dependencies": {
-    "axios": "^0.18.0"
+    "axios": "^0.19.0",
+    "supports-color": "^7.0.0"
   }
 }

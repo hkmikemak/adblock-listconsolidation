@@ -17,17 +17,17 @@ module.exports = {
     __filename: false
   },
   plugins: [
-    new UglifyJsPlugin({
-      parallel: true,
-      uglifyOptions: {
-        ecma: 6,
-        compress: true,
-        output: {
-          comments: false,
-          ecma: 6
-        }
-      }
-    })
+    // new UglifyJsPlugin({
+    //   parallel: true,
+    //   uglifyOptions: {
+    //     ecma: 6,
+    //     compress: true,
+    //     output: {
+    //       comments: false,
+    //       ecma: 6
+    //     }
+    //   }
+    // })
   ],
   externals: [
     (context, request, callback) => {
