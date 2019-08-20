@@ -1,4 +1,5 @@
 import axios from 'axios';
+import chalk from 'chalk';
 
 const config = require('./config.json');
 
@@ -60,9 +61,9 @@ const generateHosts: () => Promise<any[]> = async () => {
       console.log(`Download url: ${url}`);
       let lines = await downloadFile(url);
       processLines(lines, whitelist, result);
-      console.log(`So far ${Object.keys(result).length} domain`);
+      console.log(chalk.green(`So far ${Object.keys(result).length} domain`));
     } catch (err) {
-      console.log(`Failed to download or process file: ${url}`, err);
+      console.log(chalk.red(`Failed to download or process file: ${url}`));
     }
   }
   return Object.keys(result).sort((a, b) => a.localeCompare(b)).map((i: string) => ({ key: i, value: result[i] }));
