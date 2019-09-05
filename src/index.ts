@@ -1,26 +1,23 @@
-import * as fs from "fs";
-import * as path from "path";
-import { exec } from 'child_process';
-import { generateHosts } from './adblock';
+import "./modules/extension";
 
-const runCommand = (command: string) => {
-  return new Promise((resolve) => {
-    exec(command, (error, stdout, stderr) => {
-      console.log(error);
-      console.log(stderr);
-      console.log(stdout);
-      resolve();
-    });
-  });
-}
+import * as path from "path";
+
+import { IConfig } from "./interfaces/IConfig";
+import { generateHosts } from "./modules/adblock";
+import { generateFile } from "./modules/output";
 
 (async () => {
-  let file = path.resolve(__dirname, './adblock');
+  const config: IConfig = require("./config.json");
+  const file = path.resolve(__dirname, "./adblock");
 
-  let hosts = await generateHosts();
-  fs.writeFileSync(file, hosts.map(i => `${i.value} ${i.key}`).join('\r\n'));
+  const adblockSources = config.adblockSources.unique();
+  const domainBlacklist = config.domainBlacklist.map((i) => i.toLocaleLowerCase()).unique();
+  const domainWhitelist = [
+    ...config.domainWhitelist.map((i) => i.toLocaleLowerCase()),
+    ...config.adblockSources.map((i) => (new URL(i)).hostname.toLocaleLowerCase()),
+  ].unique();
 
-  // await runCommand(`sshpass -p "27688918" scp "${file}" root@192.168.1.1:/etc/adblock_hosts`);
-  // await runCommand(`sshpass -p "27688918" ssh root@192.168.1.1 "killall -HUP dnsmasq"`);
-  // await runCommand(`sshpass -p "27688918" ssh root@192.168.1.1 "/etc/init.d/dnsmasq restart"`);
+  const hosts = await generateHosts(adblockSources, domainWhitelist, domainBlacklist);
+
+  generateFile(file, hosts, config.outputType);
 })();

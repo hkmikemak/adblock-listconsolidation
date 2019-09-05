@@ -6,7 +6,7 @@ const WEBPACK_CONFIG = require('./webpack.config');
 
 const CONFIG = {
   del: './dist',
-  config: './src/config.json'
+  config: ['./src/config.json', './package.json']
 };
 
 gulp.task('clean', () => del(CONFIG.del));

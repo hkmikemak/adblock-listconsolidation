@@ -1,9 +1,11 @@
 {
   "compilerOptions": {
-    "target": "es6",
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
     "module": "commonjs",
+    "noImplicitAny": true,
     "removeComments": true,
-    "noImplicitAny": true
+    "target": "es6"
   },
   "include": [
     "**/*.ts"
