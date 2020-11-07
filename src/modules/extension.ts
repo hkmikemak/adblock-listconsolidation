@@ -3,7 +3,7 @@ interface Array<T> {
 }
 
 function unique<T>(this: T[]) {
-  return [...new Set(this)];
+    return [...new Set(this)];
 }
 
 Array.prototype.unique = unique;

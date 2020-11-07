@@ -22,7 +22,7 @@ module.exports = {
       parallel: true,
       terserOptions: {
         compress: true,
-        ecma: 6,
+        ecma: 2020,
         mangle: true,
         output: {
           beautify: false,
