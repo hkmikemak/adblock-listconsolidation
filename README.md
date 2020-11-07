@@ -1,12 +1,14 @@
 # Adblock Hosts File Consoliation
 
-## Requirement
+## Build
 
-If a url in `adblockSources` has `.7z` file format, `7za` is required in the `PATH`.
+```sh
+npm run gulp
+```
 
 ## Usage
 
-```shell
+```sh
 node index.js
 ```
 
@@ -19,3 +21,21 @@ node index.js
 **domainWhitelist** : List of low-level domains (e.g. reddit.com)
 
 **outputType** : `HOSTS` or `UNBOUND`
+
+## Use in docker
+
+1. `npm run gulp`
+2. `docker build --tag adblock .`
+3. Setup crontab with scripts
+
+   ```sh
+   #/bin/sh
+
+   set -ex
+
+   id=$(docker run --detach adblock)
+   docker wait $id
+   docker cp $id:/app/adblock .
+   docker rm $id
+   /etc/init.d/dnsmasq restart
+   ```
