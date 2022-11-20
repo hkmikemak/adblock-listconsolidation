@@ -2,7 +2,9 @@
   "adblockSources": [
     "http://hostsfile.org/Downloads/hosts.txt",
     "http://pgl.yoyo.org/as/serverlist.php?hostformat=hosts&showintro=0&mimetype=plaintext",
-    "http://rlwpx.free.fr/WPFF/hblc.7z"
+    "https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts",
+    "https://raw.githubusercontent.com/StevenBlack/hosts/master/alternates/fakenews/hosts",
+    "https://raw.githubusercontent.com/StevenBlack/hosts/master/alternates/gambling/hosts"
   ],
   "domainBlacklist": [
     "adapi.now.com",

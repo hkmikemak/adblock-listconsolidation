@@ -1,23 +1,25 @@
-import "./modules/extension";
+import './modules/extension';
 
-import * as path from "path";
+import { readFileSync } from 'node:fs';
+import { join, resolve } from 'node:path';
+import { cwd } from 'node:process';
 
-import { IConfig } from "./interfaces/IConfig";
-import { generateHosts } from "./modules/adblock";
-import { generateFile } from "./modules/output";
+import { IConfig } from './interfaces/IConfig';
+import { generateHosts } from './modules/adblock';
+import { generateFile } from './modules/output';
 
 (async () => {
-    const config: IConfig = require("./config.json");
-    const file = path.resolve(__dirname, "./adblock");
+  const config: IConfig = JSON.parse(readFileSync(resolve(join(cwd(), "config.json")), { encoding: "utf-8" }));
+  const file = resolve(join(cwd(), "adblock"));
 
-    const adblockSources = config.adblockSources.unique();
-    const domainBlacklist = config.domainBlacklist.map((i) => i.toLocaleLowerCase()).unique();
-    const domainWhitelist = [
-        ...config.domainWhitelist.map((i) => i.toLocaleLowerCase()),
-        ...config.adblockSources.map((i) => (new URL(i)).hostname.toLocaleLowerCase()),
-    ].unique();
+  const adblockSources = config.adblockSources.unique();
+  const domainBlacklist = config.domainBlacklist.map((i) => i.toLocaleLowerCase()).unique();
+  const domainWhitelist = [
+    ...config.domainWhitelist.map((i) => i.toLocaleLowerCase()),
+    ...config.adblockSources.map((i) => (new URL(i)).hostname.toLocaleLowerCase()),
+  ].unique();
 
-    const hosts = await generateHosts(adblockSources, domainWhitelist, domainBlacklist);
+  const hosts = await generateHosts(adblockSources, domainWhitelist, domainBlacklist);
 
-    generateFile(file, hosts, config.outputType);
+  generateFile(file, hosts, config.outputType);
 })();
