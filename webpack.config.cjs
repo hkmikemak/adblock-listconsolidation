@@ -5,9 +5,13 @@ module.exports = {
   entry: {
     index: "./src/index.ts"
   },
-  externals: [(context, request, callback) => {
-    if (request === "./config.json") return callback(null, `commonjs ${request}`);else if (request == "7zip-bin") return callback(null, `commonjs ${request}`);else callback();
-  }],
+  externals: [
+    (context, request, callback) => {
+      if (request === "./config.json") return callback(null, `commonjs ${request}`);
+      else if (request === "7zip-bin") return callback(null, `commonjs ${request}`);
+      else callback();
+    }
+  ],
   mode: "production",
   module: {
     rules: [{

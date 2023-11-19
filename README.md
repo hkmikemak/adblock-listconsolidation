@@ -3,7 +3,7 @@
 ## Build
 
 ```sh
-npm run gulp
+npm run dev
 ```
 
 ## Usage

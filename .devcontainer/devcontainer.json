@@ -1,0 +1,27 @@
+{
+  "build": {
+    "dockerfile": "Dockerfile"
+  },
+  "features": {
+    "ghcr.io/devcontainers/features/common-utils:2": {
+      "installZsh": true,
+      "configureZshAsDefaultShell": true,
+      "installOhMyZsh": true,
+      "installOhMyZshConfig": true
+    },
+    "ghcr.io/devcontainers/features/docker-in-docker:2": {}
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "bierner.markdown-mermaid",
+        "dbaeumer.vscode-eslint",
+        "EditorConfig.EditorConfig",
+        "github.vscode-github-actions",
+        "richie5um2.vscode-sort-json",
+        "ritwickdey.LiveServer",
+        "yzhang.markdown-all-in-one"
+      ]
+    }
+  }
+}
